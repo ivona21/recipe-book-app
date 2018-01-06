@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  toDisplay : string = "Recipes";
   title = 'app';
+
+  onComponentChosen(component: string){
+    this.toDisplay = component;
+  }
 }
