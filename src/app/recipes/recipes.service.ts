@@ -34,9 +34,7 @@ export class RecipesService {
         return this.recipes.slice();
     }
 
-    addIngredientsToShoppingList(ingredients: Ingredient[]){
-        ingredients.forEach((ingredient) => {
-            this.shoppingListService.addIngredient(ingredient);
-        })
+    addIngredientsToShoppingList(ingredients: Ingredient[]) {
+        this.shoppingListService.addIngredients(ingredients);
     }
 }
