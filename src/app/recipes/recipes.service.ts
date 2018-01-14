@@ -19,7 +19,7 @@ export class RecipesService {
                 new Ingredient("rosemary", 4)
             ]),
         new Recipe(
-            "Pasta vegetale",
+            "Pasta_vegetale",
             "Delicious pasta!",
             "http://images.media-allrecipes.com/images/75131.jpg",
             [
@@ -33,6 +33,10 @@ export class RecipesService {
     getRecipes() {
         return this.recipes.slice();
     }
+
+   getRecipeById(index: number){
+    return this.recipes[index];
+   }
 
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.shoppingListService.addIngredients(ingredients);
