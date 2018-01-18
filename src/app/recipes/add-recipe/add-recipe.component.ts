@@ -7,9 +7,9 @@ import { RecipesService } from "../recipes.service";
     selector: "app-add-recipe",
     templateUrl: "./add-recipe.component.html"
 })
-export class AddRecipeComponent implements OnInit{
+export class AddRecipeComponent implements OnInit {
     constructor(private route: ActivatedRoute,
-                private recipeService: RecipesService){}
+        private recipeService: RecipesService) { }
     editMode: boolean = false;
     id: number;
     recipeForm: FormGroup;
@@ -25,23 +25,38 @@ export class AddRecipeComponent implements OnInit{
         )
     }
 
-    initForm(){
+    initForm() {
         let recipeName = "";
         let recipeImagePath = "";
         let recipeDescription = "";
+        let recipeIngredients = new FormArray([]);
 
-        if (this.editMode){
+        if (this.editMode) {
             const recipe = this.recipeService.getRecipeById(this.id);
             recipeName = recipe.name;
             recipeImagePath = recipe.imagePath;
-            recipeDescription = recipe.description
-        }    
+            recipeDescription = recipe.description;
+            if (recipe["ingredients"]) {
+                for (let ingredient of recipe.ingredients) {
+                    recipeIngredients.push(
+                        new FormGroup({
+                            "name": new FormControl(ingredient.name),
+                            "amount": new FormControl(ingredient.amount)
+                        })
+                    )                    
+                }
+            }
+        }
 
         this.recipeForm = new FormGroup({
             "name": new FormControl(recipeName),
             "imagePath": new FormControl(recipeImagePath),
             "description": new FormControl(recipeDescription),
-            "ingredients": new FormArray([])
+            "ingredients": recipeIngredients
         });
+    }
+
+    onSubmit() {
+        console.log(this.recipeForm);
     }
 }
