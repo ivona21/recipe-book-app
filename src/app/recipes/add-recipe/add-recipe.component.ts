@@ -36,14 +36,14 @@ export class AddRecipeComponent implements OnInit {
             recipeName = recipe.name;
             recipeImagePath = recipe.imagePath;
             recipeDescription = recipe.description;
-            if (recipe["ingredients"]) {
+            if (recipe.ingredients) {
                 for (let ingredient of recipe.ingredients) {
                     recipeIngredients.push(
                         new FormGroup({
-                            "name": new FormControl(ingredient.name),
-                            "amount": new FormControl(ingredient.amount)
+                           "name": new FormControl(ingredient.name),
+                           "amount": new FormControl(ingredient.amount)
                         })
-                    )                    
+                    )
                 }
             }
         }
@@ -54,6 +54,15 @@ export class AddRecipeComponent implements OnInit {
             "description": new FormControl(recipeDescription),
             "ingredients": recipeIngredients
         });
+    }
+
+    onAddIngredient(){
+        (<FormArray>this.recipeForm.get("ingredients")).push(
+            new FormGroup({
+                "name": new FormControl(),
+                "amount": new FormControl()
+            })
+        )
     }
 
     onSubmit() {
