@@ -7,6 +7,7 @@ import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.com
 import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
 import { AddRecipeComponent } from "./recipes/add-recipe/add-recipe.component";
 import { SignupComponent } from "./auth/signup/signup.component";
+import { SigninComponent } from "./auth/signin/signin.component";
 
 const appRoutes: Routes = [
     { path: "", redirectTo: "recipes", pathMatch: "full" },
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
             { path: "", component: RecipeStartComponent }
         ]
     },
-    { path: "signup", component: SignupComponent }
+    { path: "signup", component: SignupComponent },
+    { path: "signin", component: SigninComponent}
 
 
 ];
