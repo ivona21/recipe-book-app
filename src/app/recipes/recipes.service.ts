@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+
 import { Subject } from "rxjs/Subject";
 
 import { Recipe } from "./recipe.model";
@@ -34,6 +35,11 @@ export class RecipesService {
 
     getRecipes() {
         return this.recipes.slice();
+    }
+
+    setRecipes(recipes: Recipe[]){
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
     }
 
    getRecipeById(index: number){

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./header/header.component";
@@ -18,6 +18,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { RecipesService } from "./recipes/recipes.service";
+import { DataStorageService } from "./shared/data-storage.service";
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AuthService } from './auth/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -31,17 +36,22 @@ import { RecipesService } from "./recipes/recipes.service";
     ShoppingEditComponent,
     DropdownDirective,
     RecipeStartComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [
     ShoppingListService, 
-    RecipesService
+    RecipesService,
+    DataStorageService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
