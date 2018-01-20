@@ -5,32 +5,36 @@ import "rxjs/Rx";
 
 import { RecipesService } from "../recipes/recipes.service";
 import { Recipe } from "../recipes/recipe.model";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable()
 export class DataStorageService {
-    constructor(private recipesService : RecipesService,
-                private http: Http) { };
+    constructor(private http: Http,
+                private recipesService: RecipesService,
+                private authService: AuthService) { };
 
     storeRecipes() {
-        return this.http.put("https://ng-recipe-book-b3d11.firebaseio.com/recipes.json", this.recipesService.getRecipes());
+        const token = this.authService.getToken();
+        return this.http.put("https://ng-recipe-book-b3d11.firebaseio.com/recipes.json?auth=" + token, this.recipesService.getRecipes());
     }
 
-    retrieveRecipes(){
-        this.http.get("https://ng-recipe-book-b3d11.firebaseio.com/recipes.json")
+    retrieveRecipes() {
+        const token = this.authService.getToken();
+        this.http.get("https://ng-recipe-book-b3d11.firebaseio.com/recipes.json?auth=" + token)
             .map(
-                (response: Response) => {
-                    const recipes: Recipe[] = response.json();                
-                    for (let recipe of recipes){
-                        if (!recipe["ingredients"]){
-                            console.log(recipe);
-                            recipe.ingredients = [];
-                        }
+            (response: Response) => {
+                const recipes: Recipe[] = response.json();
+                for (let recipe of recipes) {
+                    if (!recipe["ingredients"]) {
+                        console.log(recipe);
+                        recipe.ingredients = [];
                     }
-                    return recipes;
-                }            
+                }
+                return recipes;
+            }
             )
             .subscribe(
-                (recipes: Recipe[]) => {                
+            (recipes: Recipe[]) => {
                 this.recipesService.setRecipes(recipes);
             })
     }

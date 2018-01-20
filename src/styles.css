@@ -1,9 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
+/*margins*/
+/*top*/
 .margin-top-10 {
     margin-top: 10px;
 }
 
+/*bottom*/
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+/*left*/
 .margin-left-15 {
     margin-left: 15px;
 }
+
+/*right*/
