@@ -9,8 +9,8 @@ import { AuthService } from "../../auth/auth.service";
     templateUrl: "./header.component.html",
     styleUrls: ["./header.component.css"]
 })
-export class HeaderComponent {   
-    constructor(private storageService: DataStorageService, private authService: AuthService) { };
+export class HeaderComponent {       
+    constructor(private storageService: DataStorageService, private authService: AuthService) {     };
       
     onSaveData(){
         this.storageService.storeRecipes()
@@ -27,5 +27,9 @@ export class HeaderComponent {
 
     onLogout(){
         this.authService.logout();
+    }
+
+    isAuth(){
+        return this.authService.isAuthenticated();
     }
 }
