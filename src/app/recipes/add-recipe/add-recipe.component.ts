@@ -72,6 +72,10 @@ export class AddRecipeComponent implements OnInit {
         this.router.navigate(["../"], { relativeTo: this.route });
     }
 
+    getControls(){
+        return (<FormArray>this.recipeForm.get('ingredients')).controls;  
+    }
+
     onCancel() {
         this.returnToRecipeList();
     }
