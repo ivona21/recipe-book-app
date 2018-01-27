@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import "rxjs/Rx";
 
@@ -15,7 +15,11 @@ export class DataStorageService {
 
     storeRecipes() {
         const token = this.authService.getToken();
-        return this.httpClient.put("https://ng-recipe-book-b3d11.firebaseio.com/recipes.json?auth=" + token, this.recipesService.getRecipes());
+        return this.httpClient.put("https://ng-recipe-book-b3d11.firebaseio.com/recipes.json?auth=" + token, 
+               this.recipesService.getRecipes(), {
+                   observe: "body",
+                   headers: new HttpHeaders().set("Authorization", "bearer 435sd35f4s35c13s5")
+               });
     }
 
     retrieveRecipes() {
@@ -34,6 +38,6 @@ export class DataStorageService {
             .subscribe(
             (recipes: Recipe[]) => {
                 this.recipesService.setRecipes(recipes);
-            })
+            })      
     }
 }
