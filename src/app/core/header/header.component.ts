@@ -16,7 +16,7 @@ export class HeaderComponent {
         this.storageService.storeRecipes()
             .subscribe(
                 (response: HttpEvent<Object>) => {
-                   
+                   console.log(response);
                 }
             );
     }
