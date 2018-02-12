@@ -38,8 +38,6 @@ export class StartEdit implements Action {
 
 export class StopEdit implements Action {
     readonly type = STOP_EDIT;
-
-    constructor(public payload: number) {}
 }
 
 export type ShoppingListActions = 
