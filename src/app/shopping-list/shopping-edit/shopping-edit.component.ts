@@ -5,6 +5,7 @@ import { Ingredient } from "../../shared/ingredient.model";
 import { ShoppingListService } from '../shopping-list.service';
 import { Subscription } from "rxjs/Subscription";
 import * as ShoppingListActions from "../ngrx/shopping-list.actions";
+import { AppState } from "../../shopping-list/ngrx/shopping-list.reducers";
 
 @Component({
   selector: 'app-shopping-edit',
@@ -12,7 +13,7 @@ import * as ShoppingListActions from "../ngrx/shopping-list.actions";
   styleUrls: ['./shopping-edit.component.css']
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
-  constructor(private shoppingListService: ShoppingListService, private store: Store<{shoppingList: {ingredients: Ingredient[]}}>) { }
+  constructor(private shoppingListService: ShoppingListService, private store: Store<AppState>) { }
   subscription: Subscription;
   editMode: boolean = false;
   editedItemIndex: number;
