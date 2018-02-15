@@ -24,34 +24,42 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
             return {
                 ...state,
                 ingredients: [
-                    ...state.ingredients, action.payload
+                    ...state.ingredients, action["payload"]
                 ]
             }
         case ShoppingListActions.ADD_INGREDIENTS:
             return {
                 ...state,
                 ingredients: [
-                    ...state.ingredients, ...<Ingredient[]>action.payload
+                    ...state.ingredients, ...<Ingredient[]>action["payload"]
                 ]
             }
         case ShoppingListActions.UPDATE_INGREDIENT:
-            const ingredient = state.ingredients[action.payload["index"]];
+            const ingredient = state.ingredients[state.editedIngredientIndex];
             const updatedIngredient = {
-                ...ingredient, ...action.payload["ingredient"]
+                ...ingredient, ...action["payload"]["ingredient"]
             };
             const ingredients = [...state.ingredients];
-            ingredients[action.payload["index"]] = updatedIngredient;
+            ingredients[state.editedIngredientIndex] = updatedIngredient;
             return {
                 ...state,
                 ingredients: ingredients
             }
         case ShoppingListActions.DELETE_INGREDIENT:
             const oldIngredients = [...state.ingredients];
-            oldIngredients.splice(Number(action["payload"]), 1);
+            oldIngredients.splice(Number(state.editedIngredientIndex), 1);
             return {
                 ...state,
                 ingredients: oldIngredients
             }
+        case ShoppingListActions.START_EDIT:
+        const editedIngredient = {...state.ingredients[Number(action["payload"])]};
+        const editedIngredientIndex = Number(action["payload"]);
+        return {
+            ...state, 
+            editedIngredient: editedIngredient, 
+            editedIngredientIndex: editedIngredientIndex
+        }
         default:
             return state;
     }
